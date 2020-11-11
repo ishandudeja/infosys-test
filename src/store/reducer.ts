@@ -29,7 +29,6 @@ const reducer = (
     switch (action.type) {
 
         case actionTypes.ADD_USER:
-            debugger
             const newUser: IUser = {
                 id: Math.random(), // not really unique
                 name: action.user.name == undefined ? "Name" : action.user.name,
@@ -54,8 +53,6 @@ const reducer = (
                     return validateNum(Math.round(Math.random() * 10000))
                 else
                     return num
-
-
             }
 
             let genPasword: () => IPasword = function (): IPasword {
@@ -74,20 +71,18 @@ const reducer = (
 
             let checkPwdIsUnique: () => IPasword = function (): IPasword {
                 let pwd: any = genPasword();
-                let isUnique:boolean=true;
-                
+                let isUnique: boolean = true;
+
                 for (let key in pwd) {
-                    
-                        for(let key2 in pwd){
-                            if  (key!=key2 && pwd[key]==pwd[key2])
-                            {
-                                isUnique=false;
-                            }
+
+                    for (let key2 in pwd) {
+                        if (key != key2 && pwd[key] == pwd[key2]) {
+                            isUnique = false;
                         }
+                    }
                 }
-                if(!isUnique)
-                checkPwdIsUnique()
-                debugger
+                if (!isUnique)
+                    checkPwdIsUnique()
                 return pwd;
             }
             checkPwdIsUnique();
@@ -105,7 +100,6 @@ const reducer = (
                 users: updatedUser,
             }
         case actionTypes.UPDATE_USER:
-            debugger
             const updateIndex = state.users.findIndex(obj => obj.id == action.user.id)
             const updatedObj = { ...state.users[updateIndex], name: action.user.name };
             const updatedUsers: IUser[] = [
@@ -113,7 +107,6 @@ const reducer = (
                 updatedObj,
                 ...state.users.slice(updateIndex + 1),
             ];
-            console.log(updatedUsers);
             return {
                 ...state,
                 users: updatedUsers,
