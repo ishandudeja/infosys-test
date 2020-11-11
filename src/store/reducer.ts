@@ -70,7 +70,7 @@ const reducer = (
                 return pwd;
 
             };
-            genPasword();
+            // genPasword();
 
             let checkPwdIsUnique: () => IPasword = function (): IPasword {
                 let pwd: any = genPasword();
@@ -86,7 +86,7 @@ const reducer = (
                         }
                 }
                 if(!isUnique)
-                genPasword()
+                checkPwdIsUnique()
                 return pwd;
             }
             checkPwdIsUnique();
