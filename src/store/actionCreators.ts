@@ -14,7 +14,7 @@ export function genPwd() {
         type: actionTypes.GENERATE_PASWORD,
           user:  { id: 0, name: "name", pasword: { s1: 0, s2: 0, s3: 0, s4: 0, s5: 0 } }
     }
-debugger
+
     return simulateHttpRequest(action)
 }
 
@@ -28,8 +28,7 @@ export function removeUser(user: IUser) {
 }
 
 export function updateUser(user: IUser) {
-    debugger
-    const action: UserAction = {
+      const action: UserAction = {
         type: actionTypes.UPDATE_USER,
         user,
     }

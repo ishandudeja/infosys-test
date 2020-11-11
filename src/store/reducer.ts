@@ -72,6 +72,25 @@ const reducer = (
             };
             genPasword();
 
+            let checkPwdIsUnique: () => IPasword = function (): IPasword {
+                let pwd: any = genPasword();
+                let isUnique:boolean=true;
+                
+                for (let key in pwd) {
+                    
+                        for(let key2 in pwd){
+                            if  (key!=key2 && pwd[key]==pwd[key2])
+                            {
+                                isUnique=false;
+                            }
+                        }
+                }
+                if(!isUnique)
+                genPasword()
+                return pwd;
+            }
+            checkPwdIsUnique();
+
             return {
                 ...state
 
