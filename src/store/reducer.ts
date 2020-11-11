@@ -87,6 +87,7 @@ const reducer = (
                 }
                 if(!isUnique)
                 checkPwdIsUnique()
+                debugger
                 return pwd;
             }
             checkPwdIsUnique();
