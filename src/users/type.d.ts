@@ -8,7 +8,7 @@ interface IPasword {
 interface IUser {
     id?: number
     name?: string
-    pasword?: IPasword
+    pasword: IPasword
 }
 
 type UserState = {

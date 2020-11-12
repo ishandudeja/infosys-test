@@ -1,6 +1,3 @@
-import { Users } from './../components/Users';
-import { stat } from "fs"
-import { useCallback } from "react"
 import * as actionTypes from "./actionTypes"
 
 const initialState: UserState = {
@@ -30,17 +27,18 @@ const reducer = (
 
         case actionTypes.ADD_USER:
             const newUser: IUser = {
-                id: Math.random(), // not really unique
-                name: action.user.name == undefined ? "Name" : action.user.name,
+                id:Math.random(), // not really unique
+                name: action.user.name === undefined ? "Name" : action.user.name,
                 pasword: action.user.pasword,
             }
+            
             return {
                 ...state,
                 users: state.users.concat(newUser),
             }
         case actionTypes.GENERATE_PASWORD:
             let validateNum: (num: Number) => any = function (num: Number): any {
-                debugger
+                
                 let isValid: boolean = true;
 
                 let pin: number[] = num.toString().split('').map(x=>+x)
@@ -88,7 +86,7 @@ const reducer = (
                 for (let key in pwd) {
 
                     for (let key2 in pwd) {
-                        if (key != key2 && pwd[key] == pwd[key2]) {
+                        if (key !== key2 && pwd[key] === pwd[key2]) {
                             isUnique = false;
                         }
                     }
@@ -112,7 +110,7 @@ const reducer = (
                 users: updatedUser,
             }
         case actionTypes.UPDATE_USER:
-            const updateIndex = state.users.findIndex(obj => obj.id == action.user.id)
+            const updateIndex = state.users.findIndex(obj => obj.id === action.user.id)
             const updatedObj = { ...state.users[updateIndex], name: action.user.name };
             const updatedUsers: IUser[] = [
                 ...state.users.slice(0, updateIndex),

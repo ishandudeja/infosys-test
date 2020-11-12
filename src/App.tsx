@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { Users } from "./components/Users"
 import { AddUser } from "./components/AddUser"
-import { addUser, genPwd, removeUser } from "./store/actionCreators"
+import { addUser,  removeUser } from "./store/actionCreators"
 import { Dispatch } from "redux"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -46,7 +45,7 @@ const App: React.FC = () => {
               />
             ))}
 
-            {users.length==0? <div>No User List Available</div> :"" }
+            {users.length===0? <div>No User List Available</div> :"" }
 
           </Route>
         </div>

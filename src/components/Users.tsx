@@ -9,16 +9,17 @@ type Props = {
 
 export const Users: React.FC<Props> = ({ user, removeUser }) => {
   const dispatch: Dispatch<any> = useDispatch()
-  const [emp, setEmp] = React.useState<IUser | {}>()
+  const [emp, setEmp] = React.useState<IUser>()
   const deleteUser = React.useCallback(
     (user: IUser) => dispatch(removeUser(user)),
     [dispatch, removeUser]
   )
   React.useEffect(function effectFunction() {
     if (emp) {
-      dispatch(updateUser(user))
-    }
-  }, [emp]);
+     dispatch(updateUser(emp))
+      }
+  },[emp,dispatch]);
+  
   const handleUserData = (user: IUser, e: React.FormEvent<HTMLInputElement>) => {
     user.name = e.currentTarget.value
     setEmp(user)
@@ -30,7 +31,7 @@ export const Users: React.FC<Props> = ({ user, removeUser }) => {
     <div className="container m-2">
       <div className="d-flex justify-content-center ">
       
-          <input type="text" value={user.name} className="m-1 border border-secondary p-2 bg-white" onChange={(e) => handleUserData(user, e)} id="name" />
+          <input type="text" value={user.name} className="m-1 border border-secondary p-2 bg-white" onChange={(e) => handleUserData(user, e)}  />
           <div className="m-1 border border-secondary p-2 bg-white"   >{user.pasword?.s1}</div>
           <div className="m-1 border border-secondary p-2 bg-white"   >{user.pasword?.s2}</div>
           <div className="m-1 border border-secondary p-2 bg-white"   >{user.pasword?.s3}</div>
