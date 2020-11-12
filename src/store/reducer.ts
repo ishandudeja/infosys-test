@@ -40,15 +40,27 @@ const reducer = (
             }
         case actionTypes.GENERATE_PASWORD:
             let validateNum: (num: Number) => any = function (num: Number): any {
+                debugger
                 let isValid: boolean = true;
-                if (num.toString().length < 4)
-                    isValid = false;
-                let pin: string[] = num.toString().split('')
-                if (pin[0] + pin[1] == pin[2] || pin[1] + pin[2] == pin[3])
-                    isValid = false
 
-                if (0 == Number(pin[0]) - Number(pin[1]) || Number(pin[1]) - Number(pin[2]) == 0 || Number(pin[2]) - Number(pin[3]))
+                let pin: number[] = num.toString().split('').map(x=>+x)
+
+                if (pin.length !== 4)
+                    isValid = false
+                //check for 2 consecutive number
+                for (let index = 0; index < 3; index++) {
+                    if ((pin[index]- pin[index + 1]) === 0) {
+                        isValid = false;
+                        break;
+                    }
+                }
+                //checking 3 or more consecutive ascending
+                if ( (pin[0] + pin[1]) === pin[2] || (pin[1] + pin[2]) === pin[3])
+                    isValid = false
+                //checking 3 or more consecutive descending
+                if ((pin[1] + pin[2]) === pin[0] || (pin[2] + pin[3]) === pin[1])
                     isValid = false;
+
                 if (!isValid)
                     return validateNum(Math.round(Math.random() * 10000))
                 else
