@@ -31,10 +31,11 @@ const reducer = (
                 name: action.user.name === undefined ? "Name" : action.user.name,
                 pasword: action.user.pasword,
             }
-            
+            const newUserList:IUser[]=state.users.concat(newUser)
             return {
                 ...state,
-                users: state.users.concat(newUser),
+                users:newUserList
+                // users: state.users.concat(newUser),
             }
         case actionTypes.GENERATE_PASWORD:
             let validateNum: (num: Number) => any = function (num: Number): any {
