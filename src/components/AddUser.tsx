@@ -19,35 +19,42 @@ export const AddUser: React.FC<Props> = ({ saveUser }) => {
 
 
   React.useEffect(function effectFunction() {
-    if (newPas) {
+    if (newPas)
       setPasword(newPas);
-    }
-    if(!isValid)
-    {setIsValid(false)}
-  }, [newPas,isValid]);
+   
+  }, [newPas]);
+  React.useEffect(function effectFunction() {
+       if (!isValid) { setIsValid(false) }
+  }, [isValid]);
 
 
   let validation: (pas: any) => boolean = function (pas: any): boolean {
-    let valid:boolean=true;
-    if (Object.keys(pas).length === 0) { 
-     valid=false;
+    let valid: boolean = true;
+    if (Object.keys(pas).length === 0) {
+      valid = false;
+      setIsValid(false);
     }
     Object.keys(pas).forEach(key => {
-      if (pas[key] === null)
-        valid=false;
+      if (pas[key] === null) {
+        valid = false;
+        setIsValid(!isValid);
+        
+      }
     })
-    setIsValid(valid);
-    return valid;
+
+     setIsValid(valid);
+    return isValid;
 
   }
 
   const addNewUser = (e: React.FormEvent) => {
     e.preventDefault()
     let newUser: IUser = { id: 0, name: "Name", pasword: pasword }
-    validation(pasword)
-    if (isValid) {
+    
+    if ( validation(pasword)) {
       saveUser(newUser);
       setPasword({})
+
     }
   }
 
@@ -80,8 +87,8 @@ export const AddUser: React.FC<Props> = ({ saveUser }) => {
 
           </div>
           <div className="d-flex justify-content-center container w-25">
-            <button type="button" name="generate"  onClick={handleClick} className="btn btn-primary btn-sm m-2 btn-block">Generate</button>
-            <button type="submit" name="saveUser"  data-testid="saveUser"  disabled={isValid !== true ? true : false} className="btn btn-primary btn-sm m-2 btn-block">Save</button>
+            <button type="button" name="generate" onClick={handleClick} className="btn btn-primary btn-sm m-2 btn-block">Generate</button>
+            <button type="submit" name="saveUser" data-testid="saveUser" disabled={isValid !== true ? true : false} className="btn btn-primary btn-sm m-2 btn-block">Save</button>
           </div>
           {isValid === false ? <div className="alert alert-danger" role="alert">
             Please Generate pasword First
