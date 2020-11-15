@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
-import { Users } from "./components/Users"
+import  Users  from "./components/Users"
 import { AddUser } from "./components/AddUser"
 import { addUser,  removeUser } from "./store/actionCreators"
 import { Dispatch } from "redux"

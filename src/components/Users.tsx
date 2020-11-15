@@ -7,7 +7,7 @@ type Props = {
   removeUser: (user: IUser) => void
 }
 
-export const Users: React.FC<Props> = ({ user, removeUser }) => {
+ const Users: React.FC<Props> = ({ user, removeUser }) => {
   const dispatch: Dispatch<any> = useDispatch()
   const [emp, setEmp] = React.useState<IUser>()
   const deleteUser = React.useCallback(
@@ -47,3 +47,5 @@ export const Users: React.FC<Props> = ({ user, removeUser }) => {
 
   )
 }
+
+export default Users;

@@ -44,8 +44,8 @@ export const AddUser: React.FC<Props> = ({ saveUser }) => {
   const addNewUser = (e: React.FormEvent) => {
     e.preventDefault()
     let newUser: IUser = { id: 0, name: "Name", pasword: pasword }
-
-    if (validation(pasword)) {
+    validation(pasword)
+    if (isValid) {
       saveUser(newUser);
       setPasword({})
     }
@@ -81,7 +81,7 @@ export const AddUser: React.FC<Props> = ({ saveUser }) => {
           </div>
           <div className="d-flex justify-content-center container w-25">
             <button type="button" name="generate"  onClick={handleClick} className="btn btn-primary btn-sm m-2 btn-block">Generate</button>
-            <button type="submit" disabled={isValid !== true ? true : false} className="btn btn-primary btn-sm m-2 btn-block">Save</button>
+            <button type="submit" name="saveUser"  data-testid="saveUser"  disabled={isValid !== true ? true : false} className="btn btn-primary btn-sm m-2 btn-block">Save</button>
           </div>
           {isValid === false ? <div className="alert alert-danger" role="alert">
             Please Generate pasword First
